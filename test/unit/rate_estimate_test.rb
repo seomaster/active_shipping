@@ -35,4 +35,10 @@ class RateEstimateTest < Minitest::Test
 
     assert_equal "somefakeref", est.estimate_reference
   end
+
+  def test_delivery_estimate_days_is_set
+    est = RateEstimate.new(@origin, @destination, @carrier, @service_name, @options.merge(delivery_estimate_days: 8))
+    
+    assert_equal 8, est.delivery_estimate_days
+  end
 end

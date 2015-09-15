@@ -54,12 +54,16 @@ module ActiveShipping
   # @!attribute insurance_price
   #   The price of insurance in cents.
   #   @return [Integer]
+  #
+  # @!attribute delivery_estimate_days
+  #   The delivery estimate days used for Correios carrier.
+  #   @return [Integer]
   class RateEstimate
     attr_reader :origin, :destination, :package_rates,
                 :carrier, :service_name, :service_code,
                 :shipping_date, :delivery_date, :delivery_range,
                 :currency, :negotiated_rate, :insurance_price,
-                :estimate_reference, :expires_at, :pickup_time
+                :estimate_reference, :expires_at, :pickup_time, :delivery_estimate_days
 
     def initialize(origin, destination, carrier, service_name, options = {})
       @origin, @destination, @carrier, @service_name = origin, destination, carrier, service_name
@@ -79,6 +83,7 @@ module ActiveShipping
       @shipping_date = date_for(options[:shipping_date])
       @delivery_date = @delivery_range.last
       @insurance_price = Package.cents_from(options[:insurance_price])
+      @delivery_estimate_days = options[:delivery_estimate_days]
     end
 
     # The total price of the shipments in cents.
