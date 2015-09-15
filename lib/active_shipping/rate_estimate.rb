@@ -58,6 +58,7 @@ module ActiveShipping
   # @!attribute delivery_estimate_days
   #   The delivery estimate days used for Correios carrier.
   #   @return [Integer]
+  #
   class RateEstimate
     attr_reader :origin, :destination, :package_rates,
                 :carrier, :service_name, :service_code,
