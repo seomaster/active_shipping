@@ -197,7 +197,7 @@ module ActiveShipping
       def rates_array
         services = normalized_services.map do |service_id, elements|
           total_price = elements.sum { |element| price(element) }
-          delivery_estimate_days = elements.sum { |element| estimate(element) }
+          delivery_estimate_days = estimate(elements.max_by { |element| estimate(element) })
           { :service_code => service_id, :delivery_estimate_days => delivery_estimate_days, :total_price => total_price, :currency => "BRL" }
         end
       end
